@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-12 22:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vvxc.bos.bean.Decidedzone" table="bc_decidedzone">
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="bcStaff" class="com.vvxc.bos.bean.Staff" fetch="select">
+            <column name="staff_id" length="32" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="30" />
+        </property>
+        <set name="bcSubareas" table="bc_subarea" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="decidedzone_id" length="32" />
+            </key>
+            <one-to-many class="com.vvxc.bos.bean.Subarea" />
+        </set>
+    </class>
+</hibernate-mapping>

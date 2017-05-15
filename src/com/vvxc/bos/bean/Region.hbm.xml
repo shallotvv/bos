@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-12 22:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping default-lazy="false">
+ <class name="com.vvxc.bos.bean.Region" table="bc_region">
+  <id name="id" type="string">
+   <column length="32" name="id"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="province" type="string">
+   <column length="50" name="province"/>
+  </property>
+  <property generated="never" lazy="false" name="city" type="string">
+   <column length="50" name="city"/>
+  </property>
+  <property generated="never" lazy="false" name="district" type="string">
+   <column length="50" name="district"/>
+  </property>
+  <property generated="never" lazy="false" name="postcode" type="string">
+   <column length="50" name="postcode"/>
+  </property>
+  <property generated="never" lazy="false" name="shortcode" type="string">
+   <column length="30" name="shortcode"/>
+  </property>
+  <property generated="never" lazy="false" name="citycode" type="string">
+   <column length="30" name="citycode"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="bcSubareas"
+   sort="unsorted" table="bc_subarea">
+   <key>
+    <column length="32" name="region_id"/>
+   </key>
+   <one-to-many class="com.vvxc.bos.bean.Subarea"/>
+  </set>
+ </class>
+</hibernate-mapping>

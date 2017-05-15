@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-12 22:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vvxc.bos.bean.Staff" table="bc_staff">
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="20" />
+        </property>
+        <property name="telephone" type="string">
+            <column name="telephone" length="20" />
+        </property>
+        <property name="haspda" type="java.lang.Character">
+            <column name="haspda" length="1" />
+        </property>
+        <property name="deltag" type="java.lang.Character">
+            <column name="deltag" length="1" />
+        </property>
+        <property name="station" type="string">
+            <column name="station" length="40" />
+        </property>
+        <property name="standard" type="string">
+            <column name="standard" length="100" />
+        </property>
+        <set name="bcDecidedzones" table="bc_decidedzone" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="staff_id" length="32" />
+            </key>
+            <one-to-many class="com.vvxc.bos.bean.Decidedzone" />
+        </set>
+    </class>
+</hibernate-mapping>

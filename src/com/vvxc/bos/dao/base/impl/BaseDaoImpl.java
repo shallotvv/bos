@@ -56,8 +56,8 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	@Override
 	public T findById(Serializable entity) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().get(entityClass, entity);
-		return null;
+		
+		return getHibernateTemplate().get(entityClass, entity);
 	}
 
 	@Override

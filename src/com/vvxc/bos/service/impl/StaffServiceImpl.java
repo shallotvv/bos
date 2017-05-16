@@ -26,6 +26,30 @@ public class StaffServiceImpl implements IStaffService {
 		// TODO Auto-generated method stub
 		return staffDao.pageQuery(pageBean);
 	}
+
+	@Override
+	public void deleteBatch(String ids) {
+		// TODO Auto-generated method stub
+		String[] split = ids.split(",");
+		
+		for (String string : split) {
+			staffDao.excuteUpdate("staff.delete", string);
+		}
+	}
+
+	@Override
+	public Staff findById(String id) {
+		// TODO Auto-generated method stub
+		Staff staff = staffDao.findById(id);
+		
+		return staff;
+	}
+
+	@Override
+	public void update(Staff staff) {
+		// TODO Auto-generated method stub
+		staffDao.update(staff);
+	}
 	
 	
 	

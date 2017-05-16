@@ -8,4 +8,10 @@ public interface IStaffService {
 	void save(Staff staff);
 
 	PageBean pageQuery(PageBean pageBean);
+
+	void deleteBatch(String ids);
+
+	Staff findById(String id);
+
+	void update(Staff staff);
 }

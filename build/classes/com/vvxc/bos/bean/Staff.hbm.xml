@@ -6,7 +6,7 @@
     <class name="com.vvxc.bos.bean.Staff" table="bc_staff">
         <id name="id" type="string">
             <column name="id" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid" />
         </id>
         <property name="name" type="string">
             <column name="NAME" length="20" />
@@ -33,4 +33,8 @@
             <one-to-many class="com.vvxc.bos.bean.Decidedzone" />
         </set>
     </class>
+    
+    <query name="staff.delete">
+    	UPDATE Staff SET deltag=1 WHERE id=?
+    </query>
 </hibernate-mapping>

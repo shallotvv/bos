@@ -37,7 +37,21 @@
 	}
 	
 	function doDelete(){
-		alert("删除...");
+		var rows=$('#grid').datagrid("getSelections");
+		if(rows.length==0){
+			$.messager.alert("提示","请选择需要删除的信息","wraning");
+
+		}else{
+			var array=new Array();
+			for(var i=0;i<rows.length;i++){
+				array.push(rows[i].id);
+				
+			}
+			var ids=array.join(",");
+
+			window.location.href='${pageContext.request.contextPath}/staffAction_delete.action?ids='+ids;
+
+		}
 	}
 	
 	function doRestore(){
@@ -134,10 +148,21 @@
 			columns : columns,
 			onDblClickRow : doDblClickRow
 		});
-		
+
 		// 添加取派员窗口
 		$('#addStaffWindow').window({
 	        title: '添加取派员',
+	        width: 400,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 400,
+	        resizable:false
+	    });
+
+		// 修改取派员窗口
+		$('#editStaffWindow').window({
+	        title: '修改取派员',
 	        width: 400,
 	        modal: true,
 	        shadow: true,
@@ -149,7 +174,10 @@
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		alert("双击表格数据...");
+		$('#editStaffWindow').window("open");
+		//$('input[name=name]').val(rowData.name);
+		$('#editStaffForm').form("load",rowData);
+		
 	}
 	$(function(){
 		var reg=/^1[3|4|5|7|8|9][0-9]{9}$/;
@@ -173,6 +201,16 @@
 		});	
 
 	});
+	$(function(){
+		$('#edit').click(function(){
+			var v=$('#editStaffForm').form("validate");
+			if(v){
+				$('#editStaffForm').submit();
+			}
+
+		});	
+
+	});
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -188,6 +226,51 @@
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
 			<form id="addStaffForm" action="${pageContext.request.contextPath}/staffAction_add.action" method="post">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">收派员信息</td>
+					</tr>
+					<!-- TODO 这里完善收派员添加 table -->
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>手机</td>
+						<td><input type="text" name="telephone" class="easyui-validatebox" required="true" data-options="validType:'tele'" /></td>
+					</tr>
+					<tr>
+						<td>单位</td>
+						<td><input type="text" name="station" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<input type="checkbox" name="haspda" value="1" />
+						是否有PDA</td>
+					</tr>
+					<tr>
+						<td>取派标准</td>
+						<td>
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>  
+						</td>
+					</tr>
+					</table>
+			</form>
+		</div>
+	</div>
+	
+	
+	<div class="easyui-window" title="对收派员进行添加或者修改" id="editStaffWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="edit" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >修改</a>
+			</div>
+		</div>
+		
+		<div region="center" style="overflow:auto;padding:5px;" border="false">
+			<form id="editStaffForm" action="${pageContext.request.contextPath}/staffAction_edit.action" method="post">
+			
+			<input type="hidden" name="id">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">收派员信息</td>

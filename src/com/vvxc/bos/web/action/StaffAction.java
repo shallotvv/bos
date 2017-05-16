@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import org.apache.catalina.connector.Response;
 import org.apache.struts2.ServletActionContext;
@@ -28,6 +29,12 @@ public class StaffAction extends BaseAction<Staff>{
 	private int page;
 	private int rows; 
 	
+	private String ids;
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+
 	public void setPage(int page) {
 		this.page = page;
 	}
@@ -41,6 +48,7 @@ public class StaffAction extends BaseAction<Staff>{
 			staffService.save(getModel());
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return "list";
 		
@@ -57,13 +65,39 @@ public class StaffAction extends BaseAction<Staff>{
 	    pageBean=staffService.pageQuery(pageBean);
 		
 		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
-		
-		JSONObject jsonObject=JSONObject.fromObject(pageBean);
+		JsonConfig jsonConfig=new JsonConfig();
+		jsonConfig.setExcludes(new String[]{"currentPage","detachedCriteria","pageSize"});
+		JSONObject jsonObject=JSONObject.fromObject(pageBean,jsonConfig);
 		String jsonString=jsonObject.toString();
 			
 		ServletActionContext.getResponse().getWriter().print(jsonString);
 		
 		return NONE;
+		
+	}
+	
+
+	public String  delete() {
+		staffService.deleteBatch(ids);
+		
+		return "list";
+		
+		
+	}
+
+	public String  edit() {
+		Staff staff=staffService.findById(getModel().getId());
+		
+		staff.setName(getModel().getName());
+		staff.setHaspda(getModel().getHaspda());
+		staff.setTelephone(getModel().getTelephone());
+		staff.setStation(getModel().getStation());
+		staff.setStandard(getModel().getStandard());
+		
+		staffService.update(staff);
+		
+		return "list";
+		
 		
 	}
 	

@@ -13,8 +13,8 @@ public class Staff implements java.io.Serializable {
 	private String id;
 	private String name;
 	private String telephone;
-	private Character haspda;
-	private Character deltag;
+	private Character haspda='0';
+	private Character deltag='0';
 	private String station;
 	private String standard;
 	private Set bcDecidedzones = new HashSet(0);

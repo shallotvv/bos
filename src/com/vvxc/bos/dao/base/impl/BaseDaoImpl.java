@@ -17,6 +17,7 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.vvxc.bos.bean.Region;
 import com.vvxc.bos.dao.base.IBaseDao;
 import com.vvxc.bos.util.PageBean;
 
@@ -105,6 +106,11 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		
 		return pageBean;
 		
+	}
+
+	public void saveOrUpdate(T entity) {
+		// TODO Auto-generated method stub
+		getHibernateTemplate().saveOrUpdate(entity);
 	}
 
 }

@@ -52,5 +52,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-spring-plugin-2.3.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-3.9-20121203.jar" sourcepath="G:/maven/repository/org/apache/poi/poi/3.9/poi-3.9-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -26,6 +26,9 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -38,7 +41,7 @@
 	function doDelete(){
 		alert("删除...");
 	}
-	
+
 	//工具栏
 	var toolbar = [ {
 		id : 'button-edit',	
@@ -132,6 +135,13 @@
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
+	$(function(){
+		$('#button-import').upload({
+			action:'${pageContext.request.contextPath}/regionAction_importXls.action',
+			name:'myFile'
+		});
+	});
+	
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">

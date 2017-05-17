@@ -36,6 +36,10 @@
 			<result name="list" >/page_base_staff</result>
 		</action>
 	
+		<action name="regionAction_*" class="regionAction" method="{1}">
+			<result name="list" >/page_base_region</result>
+		</action>
+	
 		
 	</package>
 </struts>

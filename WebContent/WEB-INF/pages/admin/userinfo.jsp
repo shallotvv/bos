@@ -29,20 +29,34 @@
 <script type="text/javascript">
 	$(function(){
 		$("body").css({visibility:"visible"});
+
+		var url="${pageContext.request.contextPath}/roleAction_listAjax.action";
+		$.post(url,{},function(data){
+
+			for(i=0;i<data.length;i++){
+				$("#roletd").append('<input type="checkbox"name=roleIds value='+data[i].id+'>'+data[i].name);
+			}
+		},"json");
+
 		$('#save').click(function(){
-			$('#form').submit();
+			var v=$("#form").form("validate");
+			if(v==true){
+				$("#form").submit();
+			}
 		});
 	});
+
+	
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
 	<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 		<div class="datagrid-toolbar">
-			<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+			<a id="save" icon="icon-save" class="easyui-linkbutton" plain="true" >保存</a>
 		</div>
 	</div>
     <div region="center" style="overflow:auto;padding:5px;" border="false">
-       <form id="form" method="post" >
+       <form id="form" method="post" action="${pageContext.request.contextPath}/userAction_add.action">
            <table class="table-edit"  width="95%" align="center">
            		<tr class="title"><td colspan="4">基本信息</td></tr>
 	           	<tr><td>用户名:</td><td><input type="text" name="username" id="username" class="easyui-validatebox" required="true" /></td>
@@ -74,6 +88,11 @@
 					</td>
 				</tr>
 	           	<tr><td>备注:</td><td colspan="3"><textarea style="width:80%"></textarea></td></tr>
+	           	<tr>
+	           		<td>选择角色</td>
+	           		<td colspan="3" style="width:80%" id="roletd">
+	           		</td>
+	           	</tr>
            </table>
        </form>
 	</div>

@@ -113,7 +113,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/region.json",
+			url : "${pageContext.request.contextPath}/regionAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -138,7 +138,17 @@
 	$(function(){
 		$('#button-import').upload({
 			action:'${pageContext.request.contextPath}/regionAction_importXls.action',
-			name:'myFile'
+			name:'myFile',
+			onComplete:function(data){
+
+				if(data=="1"){
+					$.messager.alert("提示","导入区域数据成功","info");
+
+				}else{
+
+					$.messager.alert("提示","导入区域数据失败","warning");
+				}
+			}
 		});
 	});
 	

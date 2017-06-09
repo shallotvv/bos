@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/com/vvxc/bos/util/MD5Utils.java=UTF-8
+encoding//src/com/vvxc/bos/util/PinYin4jUtils.java=UTF-8
+encoding//src/com/vvxc/crm/domain/Customer.java=UTF-8
+encoding//src/com/vvxc/crm/service/CustomerService.java=UTF-8

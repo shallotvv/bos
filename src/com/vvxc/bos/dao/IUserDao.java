@@ -7,4 +7,6 @@ public interface IUserDao extends IBaseDao<User> {
 
 	User findByUsernameAndPw(String username, String pw);
 
+	User findByUsername(String username);
+
 }

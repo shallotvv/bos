@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-25 23:35:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vvxc.bos.bean.Noticebill" table="qp_noticebill">
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one name="user" class="com.vvxc.bos.bean.User" fetch="select">
+            <column name="user_id" length="32" />
+        </many-to-one>
+        <many-to-one name="staff" class="com.vvxc.bos.bean.Staff" fetch="select">
+            <column name="staff_id" length="32" />
+        </many-to-one>
+        <property name="customerId" type="string">
+            <column name="customer_id" length="32" />
+        </property>
+        <property name="customerName" type="string">
+            <column name="customer_name" length="20" />
+        </property>
+        <property name="delegater" type="string">
+            <column name="delegater" length="20" />
+        </property>
+        <property name="telephone" type="string">
+            <column name="telephone" length="20" />
+        </property>
+        <property name="pickaddress" type="string">
+            <column name="pickaddress" length="200" />
+        </property>
+        <property name="arrivecity" type="string">
+            <column name="arrivecity" length="20" />
+        </property>
+        <property name="product" type="string">
+            <column name="product" length="20" />
+        </property>
+        <property name="pickdate" type="date">
+            <column name="pickdate" length="10" />
+        </property>
+        <property name="num" type="java.lang.Integer">
+            <column name="num" />
+        </property>
+        <property name="weight" type="java.lang.Double">
+            <column name="weight" precision="22" scale="0" />
+        </property>
+        <property name="volume" type="string">
+            <column name="volume" length="20" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+        <property name="ordertype" type="string">
+            <column name="ordertype" length="20" />
+        </property>
+        <set name="workbills" table="qp_workbill" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="noticebill_id" length="32" />
+            </key>
+            <one-to-many class="com.vvxc.bos.bean.Workbill" />
+        </set>
+    </class>
+</hibernate-mapping>

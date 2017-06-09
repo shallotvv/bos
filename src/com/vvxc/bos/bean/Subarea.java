@@ -7,8 +7,20 @@ package com.vvxc.bos.bean;
 public class Subarea implements java.io.Serializable {
 
 	private String id;
-	private Region bcRegion;
-	private Decidedzone bcDecidedzone;
+	private Region region;
+	private Decidedzone decidedzone;
+	
+	public String  getSubareaId() {
+		return id;
+	}
+	public Decidedzone getDecidedzone() {
+		return decidedzone;
+	}
+
+	public void setDecidedzone(Decidedzone decidedzone) {
+		this.decidedzone = decidedzone;
+	}
+
 	private String addresskey;
 	private String startnum;
 	private String endnum;
@@ -26,8 +38,8 @@ public class Subarea implements java.io.Serializable {
 			String addresskey, String startnum, String endnum,
 			Character single, String position) {
 		this.id = id;
-		this.bcRegion = bcRegion;
-		this.bcDecidedzone = bcDecidedzone;
+		this.region = bcRegion;
+		this.decidedzone = bcDecidedzone;
 		this.addresskey = addresskey;
 		this.startnum = startnum;
 		this.endnum = endnum;
@@ -43,21 +55,14 @@ public class Subarea implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Region getBcRegion() {
-		return this.bcRegion;
+	public Region getRegion() {
+		return this.region;
 	}
 
-	public void setBcRegion(Region bcRegion) {
-		this.bcRegion = bcRegion;
+	public void setRegion(Region bcRegion) {
+		this.region = bcRegion;
 	}
 
-	public Decidedzone getBcDecidedzone() {
-		return this.bcDecidedzone;
-	}
-
-	public void setBcDecidedzone(Decidedzone bcDecidedzone) {
-		this.bcDecidedzone = bcDecidedzone;
-	}
 
 	public String getAddresskey() {
 		return this.addresskey;

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>bos</display-name>
+  <filter> 
+    <!-- 这里的 filter-name 要和 spring 的 applicationContext-shiro.xml 里的 
+            org.apache.shiro.spring.web.ShiroFilterFactoryBean 的 bean name 相同 --> 
+    <filter-name>shiroSecurityFilter</filter-name> 
+    
+	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+	<init-param> 
+	    <param-name>targetFilterLifecycle</param-name> 
+	    <param-value>true</param-value> 
+	</init-param> 
+  </filter>  
+  <filter-mapping> 
+	    <filter-name>shiroSecurityFilter</filter-name> 
+	    <url-pattern>/*</url-pattern> 
+  </filter-mapping> 
+  
+  
   <!-- 中文乱码 -->
   <filter>
   	<filter-name>CharacterEncodingFilter</filter-name>

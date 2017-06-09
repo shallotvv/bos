@@ -17,7 +17,12 @@ public class Region implements java.io.Serializable {
 	private String postcode;
 	private String shortcode;
 	private String citycode;
-	private Set bcSubareas = new HashSet(0);
+	private Set subareas = new HashSet(0);
+	
+	public String getName() {
+		return province+city+district;
+		
+	}
 
 	public Region() {
 	}
@@ -35,7 +40,7 @@ public class Region implements java.io.Serializable {
 		this.postcode = postcode;
 		this.shortcode = shortcode;
 		this.citycode = citycode;
-		this.bcSubareas = bcSubareas;
+		this.subareas = bcSubareas;
 	}
 
 	public String getId() {
@@ -94,12 +99,12 @@ public class Region implements java.io.Serializable {
 		this.citycode = citycode;
 	}
 
-	public Set getBcSubareas() {
-		return this.bcSubareas;
+	public Set getSubareas() {
+		return this.subareas;
 	}
 
-	public void setBcSubareas(Set bcSubareas) {
-		this.bcSubareas = bcSubareas;
+	public void setSubareas(Set subareas) {
+		this.subareas = subareas;
 	}
 
 }

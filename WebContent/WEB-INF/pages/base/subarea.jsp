@@ -27,6 +27,12 @@
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
+
+function doDblClickRow(){
+	alert("双击表格数据...");
+}
+
+
 	function doAdd(){
 		$('#addSubareaWindow').window("open");
 	}
@@ -44,7 +50,8 @@
 	}
 	
 	function doExport(){
-		alert("导出");
+		window.location.href="${pageContext.request.contextPath}/subareaAction_exportXls.action";
+		
 	}
 	
 	function doImport(){
@@ -160,7 +167,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/subarea.json",
+			url : "${pageContext.request.contextPath}/subareaAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -187,15 +194,51 @@
 	        height: 400,
 	        resizable:false
 	    });
-		$("#btn").click(function(){
-			alert("执行查询...");
-		});
+				
+
 		
+		$("#save").click(function(){
+			var v=$('#addSubareaFrom').form("validate");
+			if(v){
+				$('#addSubareaFrom').submit();
+			}
+			
+		})
 	});
 
-	function doDblClickRow(){
-		alert("双击表格数据...");
-	}
+	$(function(){
+
+
+
+		$.fn.serializeJson=function(){  
+		    var serializeObj={};  
+		    var array=this.serializeArray();
+		    $(array).each(function(){  
+		        if(serializeObj[this.name]){  
+		            if($.isArray(serializeObj[this.name])){  
+		                serializeObj[this.name].push(this.value);  
+		            }else{  
+		                serializeObj[this.name]=[serializeObj[this.name],this.value];  
+		            }  
+		        }else{  
+		            serializeObj[this.name]=this.value;   
+		        }  
+		    });  
+		    return serializeObj;  
+		}; 
+
+
+	    
+		$("#btn").click(function(){
+			var json=$("#serachForm").serializeJson();
+			$("#grid").datagrid("load",json);
+			$('#searchWindow').window("close");
+		});
+
+		
+	});
+	
+
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -211,20 +254,17 @@
 		</div>
 		
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addSubareaFrom" method="post"action="${pageContext.request.contextPath}/subareaAction_add.action">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">分区信息</td>
 					</tr>
 					<tr>
-						<td>分拣编码</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
 						<td>选择区域</td>
 						<td>
 							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+    							data-options="valueField:'id',textField:'name',mode:'remote',
+    							url:'${pageContext.request.contextPath}/regionAction_listajax.action'" />  
 						</td>
 					</tr>
 					<tr>
@@ -260,7 +300,7 @@
 	<!-- 查询分区 -->
 	<div class="easyui-window" title="查询分区窗口" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="serachForm">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">查询条件</td>

@@ -37,7 +37,42 @@
 				$('#noticebillForm').submit();
 			}
 		});
+
+		$('input[name=telephone]').blur(function(){
+			var phonenumber=this.value;
+			var url="${pageContext.request.contextPath}/noticebillAction_findCustomerByTelephone.action";
+			$.post(url,{"telephone":phonenumber},function(data){
+				if(data!=null){
+					var name=data.name;
+					var address=data.address;
+					var id=data.id;
+					var decidedzone_id=data.decidedzone_id;
+
+					$("input[name=customerId]").val(id);
+					$("input[name=customerName]").val(name);
+					$("input[name=delegater]").val(name);
+					$("input[name=pickaddress]").val(address);
+					$("input[name=decidedzone_id]").val(decidedzone_id);
+					
+				}else{
+
+
+					$("input[name=customerId]").val("");
+					$("input[name=customerName]").val("");
+					$("input[name=delegater]").val("");
+					$("input[name=pickaddress]").val("");
+					$("input[name=decidedzone_id]").val(" ");
+				}
+			},"json");
+			
+		});
+
+		$("#save").click(function(){
+			$("#noticebillForm"),submit();
+		});
 	});
+
+	
 </script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -45,14 +80,18 @@
 		border="false">
 		<div class="datagrid-toolbar">
 			<a id="save" icon="icon-save" href="#" class="easyui-linkbutton"
-				plain="true">新单</a>
+				plain="true" >新单</a>
 			<a id="edit" icon="icon-edit" href="${pageContext.request.contextPath }/page_qupai_noticebill.action" class="easyui-linkbutton"
 				plain="true">工单操作</a>	
 		</div>
 	</div>
 	<div region="center" style="overflow:auto;padding:5px;" border="false">
-		<form id="noticebillForm" action="" method="post">
-			<table class="table-edit" width="95%" align="center">
+		<form id="noticebillForm" action="${pageContext.request.contextPath}/noticebillAction_add.action" method="post">
+			<table class="table-edit" width="100%" align="center">
+			
+				<input type="text" class="easyui-validatebox" name="decidedzone_id"
+					hidden="true"/>
+					
 				<tr class="title">
 					<td colspan="4">客户信息</td>
 				</tr>
@@ -62,15 +101,15 @@
 						required="true" /></td>
 					<td>客户编号:</td>
 					<td><input type="text" class="easyui-validatebox"  name="customerId"
-						required="true" /></td>
+						/></td>
 				</tr>
 				<tr>
 					<td>客户姓名:</td>
 					<td><input type="text" class="easyui-validatebox" name="customerName"
-						required="true" /></td>
+						/></td>
 					<td>联系人:</td>
 					<td><input type="text" class="easyui-validatebox" name="delegater"
-						required="true" /></td>
+						 /></td>
 				</tr>
 				<tr class="title">
 					<td colspan="4">货物信息</td>
@@ -78,36 +117,36 @@
 				<tr>
 					<td>品名:</td>
 					<td><input type="text" class="easyui-validatebox" name="product"
-						required="true" /></td>
+						 /></td>
 					<td>件数:</td>
 					<td><input type="text" class="easyui-numberbox" name="num"
-						required="true" /></td>
+						 /></td>
 				</tr>
 				<tr>
 					<td>重量:</td>
 					<td><input type="text" class="easyui-numberbox" name="weight"
-						required="true" /></td>
+						 /></td>
 					<td>体积:</td>
 					<td><input type="text" class="easyui-validatebox" name="volume"
-						required="true" /></td>
+						/></td>
 				</tr>
 				<tr>
 					<td>取件地址</td>
 					<td colspan="3"><input type="text" class="easyui-validatebox" name="pickaddress"
-						required="true" size="144"/></td>
+						required="true"  size="144"/></td>
 				</tr>
 				<tr>
 					<td>到达城市:</td>
 					<td><input type="text" class="easyui-validatebox" name="arrivecity"
-						required="true" /></td>
+						 /></td>
 					<td>预约取件时间:</td>
 					<td><input type="text" class="easyui-datebox" name="pickdate"
-						data-options="required:true, editable:false" /></td>
+						data-options=" editable:false" /></td>
 				</tr>
 				<tr>
 					<td>备注:</td>
 					<td colspan="3"><textarea rows="5" cols="80" type="text" class="easyui-validatebox" name="remark"
-						required="true" ></textarea></td>
+						 ></textarea></td>
 				</tr>
 			</table>
 		</form>

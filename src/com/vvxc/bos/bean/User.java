@@ -1,6 +1,10 @@
 package com.vvxc.bos.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.SimpleFormatter;
 
 /**
  * User entity. @author MyEclipse Persistence Tools
@@ -19,8 +23,35 @@ public class User implements java.io.Serializable {
 	private String station;
 	private String telephone;
 	private String remark;
+	private Set<Role> roles = new HashSet(0);
+	private Set noticebills = new HashSet(0);
 
 	// Constructors
+
+	public String  getRoleNames() {
+		String names="";
+		
+		for (Role role : roles) {
+			names+=role.getName();
+		}
+		return names;
+		
+	}
+	public Set getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set roles) {
+		this.roles = roles;
+	}
+
+	public Set getNoticebills() {
+		return noticebills;
+	}
+
+	public void setNoticebills(Set noticebills) {
+		this.noticebills = noticebills;
+	}
 
 	/** default constructor */
 	public User() {
@@ -84,6 +115,16 @@ public class User implements java.io.Serializable {
 
 	public Date getBirthday() {
 		return this.birthday;
+	}
+	
+	public String  getFormatBirthday() {
+		
+		if (birthday!=null) {
+
+			return new SimpleDateFormat("yyyy-MM-dd").format(getBirthday());
+		}
+		
+		return "";
 	}
 
 	public void setBirthday(Date birthday) {

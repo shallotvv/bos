@@ -26,7 +26,7 @@
   <property generated="never" lazy="false" name="citycode" type="string">
    <column length="30" name="citycode"/>
   </property>
-  <set fetch="select" inverse="true" lazy="true" name="bcSubareas"
+  <set fetch="select" inverse="true" lazy="true" name="subareas"
    sort="unsorted" table="bc_subarea">
    <key>
     <column length="32" name="region_id"/>

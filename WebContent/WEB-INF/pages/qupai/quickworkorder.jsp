@@ -165,6 +165,18 @@
 			onAfterEdit : function(rowIndex, rowData, changes){
 				console.info(rowData);
 				editIndex = undefined;
+
+				var url = "${pageContext.request.contextPath}/workordermanagerAction_add.action";
+
+				$.post(url,rowData,function(data){
+					if(data==1){
+						$.messager.alert("提示","录入成功","info");
+
+					}else{
+
+						$.messager.alert("提示","录入失败","warning");
+					}
+				});
 			}
 		});
 	});

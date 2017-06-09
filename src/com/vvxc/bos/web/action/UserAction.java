@@ -1,8 +1,17 @@
 package com.vvxc.bos.web.action;
 
 import java.io.IOException;
+import java.util.List;
+
+
+
+
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,15 +22,20 @@ import com.vvxc.bos.bean.User;
 import com.vvxc.bos.service.IUserService;
 import com.vvxc.bos.util.MD5Utils;
 import com.vvxc.bos.web.action.base.BaseAction;
+import com.vvxc.crm.domain.Customer;
+import com.vvxc.crm.service.CustomerService;
 
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction<User>{
-	@Autowired
-	IUserService userService;
-	
 	private String checkcode;
 	
+	private String[] roleIds;
+	
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
 	public void setCheckcode(String checkcode) {
 		this.checkcode = checkcode;
 	}
@@ -32,18 +46,24 @@ public class UserAction extends BaseAction<User>{
 		
 		if (StringUtils.isNotBlank(checkcode)) {
 			if (checkcode.equals(key)) {
-				User user=userService.login(getModel());
-				if (user!=null) {
-					ServletActionContext.getRequest().getSession().setAttribute("loginUser", user); 
-					this.clearActionErrors();
-					return "home";
-				}
+				Subject subject=SecurityUtils.getSubject();
+				String password=MD5Utils.md5(getModel().getPassword());
 				
-				this.addActionError("用户名或密码错误");
-				return "login";
+				AuthenticationToken token=new UsernamePasswordToken(getModel().getUsername(), password);
+				try {
+					subject.login(token);
+				} catch (Exception e) {
+					this.addActionError("账号或者密码错误");
+					return "login";
+				}
+				User user=(User) subject.getPrincipal();
+				ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
+				return "home";
 			}
 			this.addActionError("验证码错误");
+			return "login";
 		}
+		this.addActionError("请输入验证码");
 		return "login";
 	}
 	
@@ -74,6 +94,21 @@ public class UserAction extends BaseAction<User>{
 		
 		ServletActionContext.getRequest().getSession().invalidate();
 		return "login";
+	}
+	
+	public String  pageQuery() throws IOException {
+		userService.pageQuery(pageBean);
+		writePageBean2Json(new String[]{"roles","noticebills"});
+		
+		return NONE;
+		
+	}
+	
+	public String add() {
+		userService.save(getModel(),roleIds);
+		
+		return "list";
+		
 	}
 
 }

@@ -39,7 +39,10 @@
 					}
 				}           
 			],
-			url : '',
+			pageList: [30,50,100],
+			fit : true,
+			pagination : true,
+			url : '${pageContext.request.contextPath}/functionAction_pageQuery.action',
 			columns : [[
 			  {
 				  field : 'id',
@@ -54,17 +57,24 @@
 			  {
 				  field : 'description',
 				  title : '描述',
-				  width : 200
+				  width : 100
 			  },  
 			  {
-				  field : 'generateMenu',
+				  field : 'generatemenu',
 				  title : '是否生成菜单',
-				  width : 200
+				  width : 100,
+				  formatter:function(data){
+					if(data==1){
+						return "是";
+					}else{
+						return "否";
+					}
+				  }
 			  },  
 			  {
 				  field : 'zindex',
 				  title : '优先级',
-				  width : 200
+				  width : 100
 			  },  
 			  {
 				  field : 'page',

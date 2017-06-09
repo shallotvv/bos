@@ -1,5 +1,9 @@
 package com.vvxc.bos.service.impl;
 
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +53,38 @@ public class StaffServiceImpl implements IStaffService {
 	public void update(Staff staff) {
 		// TODO Auto-generated method stub
 		staffDao.update(staff);
+	}
+
+	@Override
+	public List<Staff> findByQ(String q) {
+		// TODO Auto-generated method stub
+		
+		return staffDao.findByQ(q);
+	}
+
+	@Override
+	public List<Staff> findAll() {
+		// TODO Auto-generated method stub
+		return staffDao.findAll();
+	}
+
+	@Override
+	public List<Staff> findListNotDeleteByQ(String q) {
+		// TODO Auto-generated method stub
+		
+		
+		DetachedCriteria criteria=DetachedCriteria.forClass(Staff.class);
+
+		criteria.add(Restrictions.like("name", "%"+q+"%"));
+		criteria.add(Restrictions.eq("deltag", '0'));
+		return staffDao.findByCriteria(criteria);
+	}
+
+	@Override
+	public List<Staff> findListNotDelete() {
+		DetachedCriteria criteria=DetachedCriteria.forClass(Staff.class);
+		criteria.add(Restrictions.eq("deltag", '0'));
+		return staffDao.findByCriteria(criteria);
 	}
 	
 	

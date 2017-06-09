@@ -24,6 +24,9 @@ import com.vvxc.bos.util.PageBean;
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	private Class<T> entityClass;
 	
+	private T test;
+	
+	
 	@Resource
 	public void setMySessionFactory(SessionFactory sessionFactory){
 		super.setSessionFactory(sessionFactory);
@@ -87,7 +90,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		// TODO Auto-generated method stub
 		int currentPage = pageBean.getCurrentPage();
 		int pageSize = pageBean.getPageSize();
-		
+			
 		DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
 		
 		detachedCriteria.setProjection(Projections.rowCount());
@@ -111,6 +114,12 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	public void saveOrUpdate(T entity) {
 		// TODO Auto-generated method stub
 		getHibernateTemplate().saveOrUpdate(entity);
+	}
+
+	@Override
+	public List findByCriteria(DetachedCriteria criteria) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 }

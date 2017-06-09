@@ -19,15 +19,23 @@
 		 </interceptors>
 		 
 		 <default-interceptor-ref name="myStack"></default-interceptor-ref>
-		 
 		<global-results>
+		
+			<result name="unauthorized">/unauthorized.jsp</result>
 			<result name="login">/login.jsp</result>
 		</global-results> 
+		 
+		 <global-exception-mappings >
+		 	<exception-mapping  result="unauthorized" exception="org.apache.shiro.authz.UnauthorizedException"></exception-mapping>
+		 </global-exception-mappings>
+		 
 		<!-- 需要进行权限控制的页面访问 -->
 		<action name="page_*_*">
 			<result name="success" type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
 		</action>
-		<action name="userAction_*" class="userAction" method="{1}">
+		<action name="userAction_*" class="userAction" method="{1}">	
+			<result name="list" >/page_admin_userlist</result>
+			
 			<result name="home" >/index.jsp</result>
 			<result name="login">/login.jsp</result>
 		</action>
@@ -39,7 +47,27 @@
 		<action name="regionAction_*" class="regionAction" method="{1}">
 			<result name="list" >/page_base_region</result>
 		</action>
+		
+		<action name="subareaAction_*" class="subareaAction" method="{1}">
+			<result name="list" >/page_base_subarea</result>
+		</action>
 	
+		<action name="decidezoneAction_*" class="decidezoneAction" method="{1}">
+			<result name="list" >/page_base_decidedzone</result>
+		</action>
+		
+		<action name="noticebillAction_*" class="noticebillAction" method="{1}">
+			<result name="list" >/page_qupai_noticebill_add</result>
+		</action>
+		<action name="workordermanagerAction_*" class="workordermanagerAction" method="{1}">
+			<result name="list" >/page_qupai_quickworkorder</result>
+		</action>
+		<action name="functionAction_*" class="functionAction" method="{1}">
+			<result name="list" >/page_admin_function</result>
+		</action>
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="list" >/page_admin_role</result>
+		</action>
 		
 	</package>
 </struts>

@@ -6,12 +6,12 @@
     <class name="com.vvxc.bos.bean.Subarea" table="bc_subarea">
         <id name="id" type="string">
             <column name="id" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid" />
         </id>
-        <many-to-one name="bcRegion" class="com.vvxc.bos.bean.Region" fetch="select">
+        <many-to-one lazy="false" name="region" class="com.vvxc.bos.bean.Region" fetch="select">
             <column name="region_id" length="32" />
         </many-to-one>
-        <many-to-one name="bcDecidedzone" class="com.vvxc.bos.bean.Decidedzone" fetch="select">
+        <many-to-one lazy="false" name="decidedzone" class="com.vvxc.bos.bean.Decidedzone" fetch="select">
             <column name="decidedzone_id" length="32" />
         </many-to-one>
         <property name="addresskey" type="string">

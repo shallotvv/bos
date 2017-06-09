@@ -124,7 +124,7 @@
 		align : 'center'
 	}, {
 		field : 'station',
-		title : '所谓单位',
+		title : '所属单位',
 		width : 200,
 		align : 'center'
 	} ] ];

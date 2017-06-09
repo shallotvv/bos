@@ -17,11 +17,11 @@ public class Staff implements java.io.Serializable {
 	private Character deltag='0';
 	private String station;
 	private String standard;
-	private Set bcDecidedzones = new HashSet(0);
+	private Set decidedzones = new HashSet(0);
 
 	public Staff() {
 	}
-
+   
 	public Staff(String id) {
 		this.id = id;
 	}
@@ -36,7 +36,7 @@ public class Staff implements java.io.Serializable {
 		this.deltag = deltag;
 		this.station = station;
 		this.standard = standard;
-		this.bcDecidedzones = bcDecidedzones;
+		this.decidedzones = bcDecidedzones;
 	}
 
 	public String getId() {
@@ -95,12 +95,12 @@ public class Staff implements java.io.Serializable {
 		this.standard = standard;
 	}
 
-	public Set getBcDecidedzones() {
-		return this.bcDecidedzones;
+	public Set getDecidedzones() {
+		return this.decidedzones;
 	}
 
-	public void setBcDecidedzones(Set bcDecidedzones) {
-		this.bcDecidedzones = bcDecidedzones;
+	public void setDecidedzones(Set bcDecidedzones) {
+		this.decidedzones = bcDecidedzones;
 	}
 
 }

@@ -3,6 +3,8 @@ package com.vvxc.bos.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.vvxc.bos.bean.Region;
 import com.vvxc.bos.util.PageBean;
 
@@ -16,5 +18,6 @@ public interface IBaseDao<T> {
 
 	PageBean pageQuery(PageBean pageBean);
 	void excuteUpdate(String queryName,Object ...objects);
+	List findByCriteria(DetachedCriteria criteria);
 }
 

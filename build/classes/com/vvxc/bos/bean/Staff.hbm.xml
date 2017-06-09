@@ -26,7 +26,7 @@
         <property name="standard" type="string">
             <column name="standard" length="100" />
         </property>
-        <set name="bcDecidedzones" table="bc_decidedzone" inverse="true" lazy="true" fetch="select">
+        <set name="decidedzones" table="bc_decidedzone" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="staff_id" length="32" />
             </key>

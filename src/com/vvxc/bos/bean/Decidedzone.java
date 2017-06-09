@@ -11,9 +11,9 @@ import java.util.Set;
 public class Decidedzone implements java.io.Serializable {
 
 	private String id;
-	private Staff bcStaff;
+	private Staff staff;
 	private String name;
-	private Set bcSubareas = new HashSet(0);
+	private Set subareas = new HashSet(0);
 
 	public Decidedzone() {
 	}
@@ -24,9 +24,9 @@ public class Decidedzone implements java.io.Serializable {
 
 	public Decidedzone(String id, Staff bcStaff, String name, Set bcSubareas) {
 		this.id = id;
-		this.bcStaff = bcStaff;
+		this.staff = bcStaff;
 		this.name = name;
-		this.bcSubareas = bcSubareas;
+		this.subareas = bcSubareas;
 	}
 
 	public String getId() {
@@ -37,12 +37,12 @@ public class Decidedzone implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Staff getBcStaff() {
-		return this.bcStaff;
+	public Staff getStaff() {
+		return this.staff;
 	}
 
-	public void setBcStaff(Staff bcStaff) {
-		this.bcStaff = bcStaff;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
 	public String getName() {
@@ -53,12 +53,12 @@ public class Decidedzone implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Set getBcSubareas() {
-		return this.bcSubareas;
+	public Set getSubareas() {
+		return this.subareas;
 	}
 
-	public void setBcSubareas(Set bcSubareas) {
-		this.bcSubareas = bcSubareas;
+	public void setSubareas(Set subareas) {
+		this.subareas = subareas;
 	}
 
 }

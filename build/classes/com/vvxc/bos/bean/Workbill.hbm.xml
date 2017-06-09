@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-25 23:35:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vvxc.bos.bean.Workbill" table="qp_workbill">
+        <id name="id" type="string">
+            <column name="id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one name="noticebill" class="com.vvxc.bos.bean.Noticebill" fetch="select">
+            <column name="noticebill_id" length="32" />
+        </many-to-one>
+        <many-to-one name="staff" class="com.vvxc.bos.bean.Staff" fetch="select">
+            <column name="staff_id" length="32" />
+        </many-to-one>
+        <property name="type" type="string">
+            <column name="type" length="20" />
+        </property>
+        <property name="pickstate" type="string">
+            <column name="pickstate" length="20" />
+        </property>
+        <property name="buildtime" type="timestamp">
+            <column name="buildtime" length="19" not-null="true" />
+        </property>
+        <property name="attachbilltimes" type="java.lang.Integer">
+            <column name="attachbilltimes" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+    </class>
+</hibernate-mapping>

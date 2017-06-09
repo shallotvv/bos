@@ -6,7 +6,7 @@
     <class name="com.vvxc.bos.bean.User" table="t_user">
         <id name="id" type="java.lang.String">
             <column name="id" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid" />
         </id>
         <property name="username" type="java.lang.String">
             <column name="username" length="20" not-null="true" />
@@ -32,6 +32,20 @@
         <property name="remark" type="java.lang.String">
             <column name="remark" />
         </property>
+        <set name="roles" table="user_role" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" length="32" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.vvxc.bos.bean.Role">
+                <column name="role_id" length="32" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="noticebills" table="qp_noticebill" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" length="32" />
+            </key>
+            <one-to-many class="com.vvxc.bos.bean.Noticebill" />
+        </set>
     </class>
     <!-- 命名查询语句 -->
     <query name="editPassword">

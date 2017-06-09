@@ -8,13 +8,13 @@
             <column name="id" length="32" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="bcStaff" class="com.vvxc.bos.bean.Staff" fetch="select">
+        <many-to-one  lazy="false" name="staff" class="com.vvxc.bos.bean.Staff" fetch="select">
             <column name="staff_id" length="32" />
         </many-to-one>
         <property name="name" type="string">
             <column name="NAME" length="30" />
         </property>
-        <set name="bcSubareas" table="bc_subarea" inverse="true" lazy="true" fetch="select">
+        <set name="subareas" table="bc_subarea" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="decidedzone_id" length="32" />
             </key>

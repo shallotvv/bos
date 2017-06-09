@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>宅急送BOS主界面</title>
+<title>管理系统主界面</title>
 <!-- 导入jquery核心类库 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/jquery-1.8.3.js"></script>
@@ -46,7 +46,7 @@
 		
 		// 基本功能菜单加载
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_findMenu.action',
 			type : 'POST',
 			dataType : 'json',
 			success : function(data) {
@@ -170,14 +170,16 @@
 	function showAbout(){
 		$.messager.alert("宅急送 v1.0","管理员邮箱: zqx@itcast.cn");
 	}
+
+	$(function(){
+		$('#bootstrap').click();
+	});
 </script>
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
 		style="height:80px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
 		<div>
-			<img src="${pageContext.request.contextPath }/images/logo.png"
-				border="0">
 		</div>
 		<div id="sessionInfoDiv"
 			style="position: absolute;right: 5px;top:10px;">
@@ -193,7 +195,7 @@
 			<div onclick="changeTheme('default');">default</div>
 			<div onclick="changeTheme('gray');">gray</div>
 			<div onclick="changeTheme('black');">black</div>
-			<div onclick="changeTheme('bootstrap');">bootstrap</div>
+			<div onclick="changeTheme('bootstrap');" id="bootstrap">bootstrap</div>
 			<div onclick="changeTheme('metro');">metro</div>
 		</div>
 		<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
@@ -231,7 +233,6 @@
 				<tr>
 					<td style="width: 300px;">
 						<div style="color: #999; font-size: 8pt;">
-							传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
 						</div>
 					</td>
 					<td style="width: *;" class="co1"><span id="online"
